@@ -12,9 +12,11 @@ const ClientSchema = new mongoose.Schema({
     },
     register_date: {
         type: Date,
+        required: true,
     },
     expiration_date: {
         type: Date,
+        required: true,
     },
     locker: {
         type: Number,
