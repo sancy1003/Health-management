@@ -1,0 +1,31 @@
+.sidebar {
+  position: fixed;
+  min-width: 200px;
+  height: 100vh;
+  background-color: #0297fb;
+  color: white;
+}
+.sidebar-logo {
+  font-size: 20px;
+  font-weight: bolder;
+  padding: 20px 0 20px 22px;
+  cursor: default;
+}
+.sidebar-list {
+  font-size: 15px;
+  font-weight: 300;
+}
+.sidebar-list li {
+  padding: 11px 0 11px 22px;
+  cursor: pointer;
+  margin: auto 0;
+}
+.sidebar-list li i {
+  margin-right: 10px;
+}
+.sidebar-list li:hover {
+  background-color: #4db8ff;
+}
+.sidebar-list li.active {
+  background-color: #0a6cad;
+}
