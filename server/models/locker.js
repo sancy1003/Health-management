@@ -6,12 +6,12 @@ const LockerSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    client_name: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "client",
-        },
-    ],
+    branch_office: {
+        type: String,
+    },
+    client: {
+        type: String,
+    },
     register_date: {
         type: Date,
     },

@@ -5,7 +5,6 @@ const router = express.Router();
 
 
 // 모든 사용자 조회
-
 router.get('/', async (req, res) => {
     try {
         const users = await User.find();
@@ -19,20 +18,20 @@ router.get('/', async (req, res) => {
 
 // 사용자 등록
 router.post("/", (req, res) => {
-    const { name, id, password, branch_office } = req.body;
+    const { name, account, password, branch_office } = req.body;
 
     // 빈칸 입력 확인
-    if (!name || !id || !password || !branch_office) {
+    if (!name || !account || !password || !branch_office) {
         return res.status(400).json({ msg: "빈칸을 모두 채워주세요."});
     }
 
     // 유저 id 중복 조회
-    User.findOne({ id }).then((user) => {
+    User.findOne({ account }).then((user) => {
         if(user) return res.status(400).json({ msg: "사용중인 아이디입니다."});
 
         const newUser = new User({
             name,
-            id,
+            account,
             password,
             branch_office
         });
@@ -41,7 +40,7 @@ router.post("/", (req, res) => {
             res.json({
                 user: {
                     name: user.name,
-                    id: user.id,
+                    account: user.account,
                     password: user.password,
                     branch_office: user.branch_office,
                 }

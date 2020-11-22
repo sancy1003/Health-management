@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { Switch, Route, Redirect } from "react-router-dom";
+import LockerList from "./normalRoute/LockerList";
 
 const MyRouter = () => {
     return (
@@ -10,7 +12,10 @@ const MyRouter = () => {
                 <Header/>
                 <div className="container">
                     <div className="contents">
-                        내용
+                        <Switch>
+                            <Route path="/" exact component={LockerList} />
+                            <Redirect from="*" to="/" />
+                        </Switch>
                     </div>
                 </div>
             </div>

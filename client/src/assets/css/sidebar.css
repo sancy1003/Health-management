@@ -4,6 +4,7 @@
   height: 100vh;
   background-color: #0297fb;
   color: white;
+  z-index: 999;
 }
 .sidebar-logo {
   font-size: 20px;
