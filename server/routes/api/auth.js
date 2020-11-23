@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
 
   // 빈칸 입력 확인
     if (!account || !password) {
-    return res.status(400).json({ msg: "모든 필드를 채워주세요." });
+    return res.status(400).json({ msg: "빈칸을 모두 채워주세요." });
     }
 
   // 유저 정보 검사
