@@ -53,6 +53,17 @@
   box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.05);
   cursor: pointer;
 }
+.locker-list-item.none {
+  background-color: #bebebe;
+  color: #ffffff;
+}
+.locker-list-item.none:hover {
+  background-color: #90cbf3;
+  color: #ffffff;
+}
+.locker-list-item.none .locker-number {
+  color: #ffffff;
+}
 .locker-list-item:hover {
   background-color: #0297fb;
   border: 1px solid #ffffff;

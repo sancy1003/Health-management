@@ -12,6 +12,9 @@ import {
     LOCKER_DELETE_REQUEST,
     LOCKER_DELETE_SUCCESS,
     LOCKER_DELETE_FAILURE,
+    LOCKER_EDIT_FAILURE,
+    LOCKER_EDIT_REQUEST,
+    LOCKER_EDIT_SUCCESS,
 } from "../types"
 
 const initialState = {
@@ -34,6 +37,7 @@ export default function (state = initialState, action) {
         case LOCKER_LOADING_REQUEST:
         case LOCKER_CREATE_REQUEST:
         case LOCKER_DELETE_REQUEST:
+        case LOCKER_EDIT_REQUEST:
             return {
                 ...state,
                 errorMsg: "",
@@ -58,6 +62,19 @@ export default function (state = initialState, action) {
                 successMsg: action.payload.msg,
             }
         case LOCKER_CREATE_FAILURE:
+            return {
+                ...state,
+                errorMsg: action.payload.data.msg,
+                loading: false,
+            }        
+        case LOCKER_EDIT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                errorMsg: "",
+                successMsg: action.payload.msg,
+            }        
+        case LOCKER_EDIT_FAILURE:
             return {
                 ...state,
                 errorMsg: action.payload.data.msg,

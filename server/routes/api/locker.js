@@ -94,4 +94,21 @@ router.delete("/:branchOffice/:deleteNumber", async (req, res) => {
     }
 })
 
+router.post("/:id/edit", async(req, res) => {
+    const { client, id } = req.body;
+    
+    try {
+        const modified_locker = await Locker.findByIdAndUpdate(
+            id,
+            {
+                client,
+            },
+            { new: true }
+        );
+        res.status(200).json({ msg: id + "라커 수정 성공, " + Date.now() });
+    } catch(e) {
+        console.log(e);
+    }
+})
+
 export default router;

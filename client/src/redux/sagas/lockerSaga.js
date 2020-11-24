@@ -11,6 +11,9 @@ import {
     LOCKER_DELETE_FAILURE,
     LOCKER_DELETE_SUCCESS,
     LOCKER_DELETE_REQUEST,
+    LOCKER_EDIT_REQUEST,
+    LOCKER_EDIT_FAILURE,
+    LOCKER_EDIT_SUCCESS,
     CLEAR_ERROR_REQUEST,
     CLEAR_ERROR_FAILURE,
     CLEAR_ERROR_SUCCESS,
@@ -92,6 +95,31 @@ function* deleteLocker(action) {
     yield takeEvery(LOCKER_DELETE_REQUEST, deleteLocker);
   }
 
+  // EditLocker
+  const editLockerAPI = (payload) => {
+      console.log(payload, "payload");
+      return axios.post(`api/locker/${payload.id}/edit`, payload);
+    };
+    
+  function* editLocker(action) {
+      try {
+          const result = yield call(editLockerAPI, action.payload);
+          yield put({
+              type: LOCKER_EDIT_SUCCESS,
+              payload: result.data,
+          });
+      } catch (e) {
+          yield put({
+              type: LOCKER_EDIT_FAILURE,
+              payload: e.response,
+          });
+      }
+    }
+    
+    function* watchEditLocker() {
+      yield takeEvery(LOCKER_EDIT_REQUEST, editLocker);
+    }
+
 // Clear Error
 function* clearError() {
   try {
@@ -115,5 +143,6 @@ export default function* LockerSaga() {
         fork(watchCreateLocker),
         fork(watchClearError),
         fork(watchDeleteLocker),
+        fork(watchEditLocker),
     ]);
 }
