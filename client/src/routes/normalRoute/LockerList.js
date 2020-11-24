@@ -4,32 +4,39 @@ import { useDispatch, useSelector } from 'react-redux';
 import LockerSaga from '../../redux/sagas/lockerSaga';
 import {LOCKER_LOADING_REQUEST, LOCKER_NONE} from "../../redux/types";
 import LockerOne from '../../components/LockerOne';
+import CreateLocker from '../../components/locker/CreateLocker';
+import DeleteLocker from '../../components/locker/DeleteLocker';
 
 import "../../assets/css/locker.css"
 
 const LockerList = () => {
-    const { lockers } = useSelector((state) => state.locker);
+    const { lockers, successMsg } = useSelector((state) => state.locker);
+    const { branchOffice } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         dispatch({type: LOCKER_NONE});
-        dispatch({type: LOCKER_LOADING_REQUEST});
-    },[dispatch]);
+        dispatch({
+            type: LOCKER_LOADING_REQUEST,
+            payload: branchOffice,
+        });
+    },[dispatch, branchOffice, successMsg]);
 
-    console.log(lockers, "lockers");
-
+    const lockerContainer = (
+        <div className="locker-container">
+            <div className="locker-btn-box">
+                <CreateLocker />
+                <DeleteLocker />
+            </div>
+            <ul className="locker-list">
+                { lockers.length !== 0 ? <LockerOne lockers={lockers} /> : ""}
+            </ul>
+        </div>
+        );
     return(
         <Fragment>
             <Helmet title="Locker" />
-            <div className="locker-container">
-                <div className="locker-btn-box">
-                    <button className="btn-create-locker">락커 생성</button>
-                    <button className="btn-delete-locker">락커 삭제</button>
-                </div>
-                <ul className="locker-list">
-                    { lockers.length !== 0 ? <LockerOne lockers={lockers} /> : "없음"}
-                </ul>
-            </div>
+            { branchOffice ? lockerContainer : "" }
         </Fragment>
     );
 }

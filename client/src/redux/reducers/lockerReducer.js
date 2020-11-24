@@ -3,14 +3,25 @@ import {
     LOCKER_LOADING_FAILURE,
     LOCKER_LOADING_SUCCESS,
     LOCKER_LOADING_REQUEST,
+    LOCKER_CREATE_REQUEST,
+    LOCKER_CREATE_FAILURE,
+    LOCKER_CREATE_SUCCESS,
+    CLEAR_ERROR_FAILURE,
+    CLEAR_ERROR_REQUEST,
+    CLEAR_ERROR_SUCCESS,
+    LOCKER_DELETE_REQUEST,
+    LOCKER_DELETE_SUCCESS,
+    LOCKER_DELETE_FAILURE,
 } from "../types"
 
 const initialState = {
     lockers: [],
     number: "",
     loading: false,
-    error: "",
+    errorMsg: "",
+    successMsg: "",
     client: "",
+    previousMatchMsg: "",
 };
 
 export default function (state = initialState, action) {
@@ -21,8 +32,11 @@ export default function (state = initialState, action) {
                 lockers: [],
             }
         case LOCKER_LOADING_REQUEST:
+        case LOCKER_CREATE_REQUEST:
+        case LOCKER_DELETE_REQUEST:
             return {
                 ...state,
+                errorMsg: "",
                 loading: true,
             }
         case LOCKER_LOADING_SUCCESS:
@@ -36,6 +50,48 @@ export default function (state = initialState, action) {
                 ...state,
                 loading: false,
             }
+        case LOCKER_CREATE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                errorMsg: "",
+                successMsg: action.payload.msg,
+            }
+        case LOCKER_CREATE_FAILURE:
+            return {
+                ...state,
+                errorMsg: action.payload.data.msg,
+                loading: false,
+            }
+        case LOCKER_DELETE_SUCCESS:
+            return {
+                ...state,
+                errorMsg: "",
+                successMsg: action.payload.msg,
+                loading: false,
+            }
+        case LOCKER_DELETE_FAILURE:
+            return {
+                ...state,
+                errorMsg: action.payload.data.msg,
+                loading: false,
+            }
+        case CLEAR_ERROR_REQUEST:
+            return {
+            ...state,
+            };
+        case CLEAR_ERROR_SUCCESS:
+            return {
+            ...state,
+            errorMsg: "",
+            previousMatchMsg: "",
+            };
+        case CLEAR_ERROR_FAILURE:
+            return {
+            ...state,
+            errorMsg: "Clear Error Fail",
+            previousMatchMsg: "Clear Error Fail",
+            };
         default:
             return state;
     }

@@ -24,7 +24,7 @@ const initialState = {
     userId: "",
     userName: "",
     userRole: "",
-    BranchOffice: "",
+    branchOffice: "",
     errorMsg: "",
     successMsg: "",
     previousMatchMsg: "",
@@ -51,7 +51,7 @@ const authReducer = (state = initialState, action) => {
             userId: action.payload.user.id,
             userRole: action.payload.user.role,
             userName: action.payload.user.name,
-            BranchOffice: action.payload.user.branch_office,
+            branchOffice: action.payload.user.branch_office,
             errorMsg: "",
             };
         case REGISTER_FAILURE:
@@ -65,7 +65,7 @@ const authReducer = (state = initialState, action) => {
             user: null,
             userId: null,
             userRole: null,
-            BranchOffice: null,
+            branchOffice: null,
             isAuthenticated: false,
             isLoading: false,
             errorMsg: action.payload.data.msg,
@@ -76,7 +76,7 @@ const authReducer = (state = initialState, action) => {
             token: null,
             user: null,
             userId: null,
-            BranchOffice: null,
+            branchOffice: null,
             isAuthenticated: false,
             isLoading: false,
             userRole: null,
@@ -96,7 +96,7 @@ const authReducer = (state = initialState, action) => {
             userId: action.payload._id,
             userName: action.payload.name,
             userRole: action.payload.role,
-            BranchOffice: action.payload.branch_office,
+            branchOffice: action.payload.branch_office,
         };
         case USER_LOADING_FAILURE:
             return {

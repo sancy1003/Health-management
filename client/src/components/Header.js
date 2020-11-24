@@ -36,7 +36,7 @@ const Header = () => {
 
     return(
         <div className="header">
-            <div className="header-title">대시보드</div>
+            <div className="header-title">라커룸 관리</div>
             <div className="header-right-box">
                 { isAuthenticated ? authLink : guestLink }
             </div>
